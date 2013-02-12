@@ -1,9 +1,11 @@
 Visibility maps
 ===============
 
-Plot a visbility world map for a celestial object, given its equatorial RA/DEC coordinates and the time.
+Plot a visibility map for a celestial object, given its RA/DEC coordinates and a time.
 
-Dependencies: pyephem, matplotlib, numpy
+Dependencies
+------------
+pyephem, matplotlib, numpy
 
 License
 -------
