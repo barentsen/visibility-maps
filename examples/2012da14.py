@@ -2,9 +2,10 @@ import sys
 sys.path.append("../")
 import logging
 import visibility   
+from multiprocessing import Pool
 
 # Ephemerides from NASA JPL Horizons
-ephem = [{'time':"18:00", 'ra':168.95103, 'dec':-57.37510},
+ephemerides = [{'time':"18:00", 'ra':168.95103, 'dec':-57.37510},
          {'time':"18:10", 'ra':169.78703, 'dec':-53.37342},
          {'time':"18:20", 'ra':170.55989, 'dec':-48.85117},
          {'time':"18:30", 'ra':171.27845, 'dec':-43.75373},
@@ -26,8 +27,8 @@ ephem = [{'time':"18:00", 'ra':168.95103, 'dec':-57.37510},
          {'time':"21:10", 'ra':179.95012, 'dec':52.52042},
          {'time':"21:20", 'ra':180.48875, 'dec':55.30278},
          {'time':"21:30", 'ra':181.03777, 'dec':57.78508}]
-    
-for eph in ephem:
+
+def do_plot(eph):
     logging.info(eph)
     # Target
     mydate = "2013/02/15 %s:00" % eph['time']
@@ -37,8 +38,13 @@ for eph in ephem:
     lon1, lon2 = -170, 190
     lat1, lat2 = -57, 74
     # Create and save map
-    m = visibility.Map(mydate, ra, dec, lon1, lon2, lat1, lat2)
+    m = visibility.Map(mydate, ra, dec, lon1, lon2, lat1, lat2, 0.2, 0.2)
     m.render()
     m.figure.text(.5, .93, 'Visibility of 2012 DA14 at %s UTC' % eph['time'], fontsize=26, ha='center')
     m.figure.text(.5, .88, '15 February 2013', fontsize=18, ha='center')
-    m.figure.savefig('%s.png' % eph['time'])
+    m.figure.savefig('2012DA14-%s.png' % eph['time'])
+
+
+if __name__ == '__main__':
+    p = Pool(processes=8)
+    p.map(do_plot, ephemerides)
