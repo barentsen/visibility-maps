@@ -69,7 +69,7 @@ class Map():
 
         """ Create the plot """
         self.figure = plt.figure(figsize=(8.485, 6))
-        self.figure.subplots_adjust(0.01, 0.00, 0.99, 0.95, 
+        self.figure.subplots_adjust(0.03, 0.00, 0.97, 0.95, 
                                     hspace=0.0, wspace=0.0)
 
         # Show earth with Mercator projection
@@ -85,7 +85,7 @@ class Map():
                      'green':  ((0., .75, .75), (1., 0.05, 0.05)), 
                      'blue' :  ((0., .75, .75), (1., 0.05, 0.05))}
         else:
-            cdict = {'red'  :  ((0., 1., 1.), (1., .1, 0.)), 
+            cdict = {'red'  :  ((0., 1., 1.), (1., .0, 0.)), 
                  'green':  ((0., 1., 1.), (1., 1., 1.)), 
                  'blue' :  ((0., 0., 0.), (1., 0., 0.))}
 
@@ -94,9 +94,9 @@ class Map():
                 
         cb = self.figure.colorbar(im, orientation='horizontal', pad=0.02, shrink=0.95, 
                             ticks=[0,30,60,90], aspect=50, format=u'%.0f\N{DEGREE SIGN}')
-        cb.ax.set_xlabel('Elevation above the horizon', fontsize=18)
+        cb.ax.set_xlabel('Elevation above the horizon (when dark)', fontsize=18)
         cl = plt.getp(cb.ax, 'xmajorticklabels')
-        plt.setp(cl, fontsize=14)
+        plt.setp(cl, fontsize=16)
 
 
 

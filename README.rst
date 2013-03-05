@@ -5,7 +5,7 @@ Plot a visibility map for a celestial object, given its RA/DEC coordinates and a
 
 Dependencies
 ------------
-pyephem, matplotlib, numpy
+Python modules: pyephem, basemap, matplotlib, numpy
 
 License
 -------
