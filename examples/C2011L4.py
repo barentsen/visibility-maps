@@ -17,24 +17,24 @@ def do_plot(date):
     m.set_target_xephem(target)
     m.render(date)
 
-    m.figure.text(.03, .93, 'Visibility of comet C/2011 L4 (PANSTARRS)', fontsize=22, ha='left')
-    m.figure.text(.03, .86, '%d %s at %s UTC' % (
+    m.figure.text(.03, .93, 'Visibility of comet Pan-STARRS', fontsize=22, ha='left')
+    m.figure.text(.03, .87, '%d %s at %s UTC' % (
                                 date.day, 
                                 date.strftime('%B %Y'), 
                                 date.strftime('%H:%M'))
                             , fontsize=22, ha='left')
-    m.figure.savefig('tmp/C2011L4-%s.png' % date.strftime('%Y%m%dT%H%M'))
+    m.figure.savefig('tmp/C2011L4-%s.png' % date.strftime('%Y%m%dT%H%M'), dpi=150)
 
 
 if __name__ == '__main__':
     dates = []
     stepsize = datetime.timedelta(hours=0.5)
     mydate = datetime.datetime(2013, 3, 5)
-    for i in range(24*30):
+    for i in range(24*60):
         dates.append( mydate )
         mydate += stepsize
 
-    p = Pool(processes=2)
+    p = Pool(processes=4)
     p.map(do_plot, dates)
 
     #do_plot(mydate)
